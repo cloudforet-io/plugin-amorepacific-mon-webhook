@@ -52,10 +52,14 @@ class EventManager(BaseManager):
     @staticmethod
     def _get_occurred_at(event_time):
         try:
+            '''
             occured_at = datetime.strptime(event_time, '%Y-%m-%d %H:%M:%S')
 
             _LOGGER.debug(f'[EventManager] _occurred_at : {occured_at}')
             return occured_at
+            '''
+            print(f'event_time: {event_time}: {type(event_time)}')
+            return event_time
 
         except Exception as e:
             current_time = datetime.now()
