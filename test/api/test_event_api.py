@@ -143,6 +143,48 @@ class TestEvent(TestCase):
             "event_time": "2021-06-29 09:51:12"
         }
 
+        raw_data_both = {
+            "status": "UP ",
+            "event_time": "2021-06-29 09:50:51",
+            "host_ip": "172.28.102.143",
+            "metric_name": "회원_주의로그 ",
+            "event_id": "32545698",
+            "summary": "01. APMALL>EAPWAS-172.28.102.143>monitor group>ecp-api.log_member",
+            "urgency": "1",
+            #"conditionlog": "[1회 발생] 이벤트 탐지 [심각도: WARN, 내용: [2021-06-29 21:50:46,433] [ WARN] [http-nio-8080-exec-37] [B2CMON_LOG.logging:130] [MON|2021-06-29 21:50:46,433|WARN|M01||MobileWeb|member||||MLEC_MEMBER_AUTH_FAILURE|/MON] Fail. API=post:/v1/M01/ap/members/autoLogin, resultMsg=유효하지 않은 자격증명이 제시 [MemberUtils.memberMonLoggingError:457 < ApMemberAuthRestApi.login:273 < ApMemberAuthRestApi.memberAutoLogin:373 < GeneratedMethodAccessor3491.invoke:-1 < DelegatingMethodAccessorImpl.invoke:43]]",
+            "resource_name": "EAPWAS-172.28.102.143",
+            "threshold": "ecp-api.log_member",
+            "metric_value": "이벤트 탐지 [심각도: WARN , 개행 포함, 내용 패턴: .*member.*] ",
+            "severity": "주의"
+        }
+
+        raw_data_host_ip = {
+            "host_ip": "172.28.102.143",
+            "metric_name": "회원_주의로그 ",
+            "event_id": "32545698",
+            "summary": "01. APMALL>EAPWAS-172.28.102.143>monitor group>ecp-api.log_member",
+            "urgency": "1",
+            "event_time": "2021-06-29 09:50:51",
+            "conditionlog": "[1회 발생] 이벤트 탐지 [심각도: WARN, 내용: [2021-06-29 21:50:46,433] [ WARN] [http-nio-8080-exec-37] [B2CMON_LOG.logging:130] [MON|2021-06-29 21:50:46,433|WARN|M01||MobileWeb|member||||MLEC_MEMBER_AUTH_FAILURE|/MON] Fail. API=post:/v1/M01/ap/members/autoLogin, resultMsg=유효하지 않은 자격증명이 제시 [MemberUtils.memberMonLoggingError:457 < ApMemberAuthRestApi.login:273 < ApMemberAuthRestApi.memberAutoLogin:373 < GeneratedMethodAccessor3491.invoke:-1 < DelegatingMethodAccessorImpl.invoke:43]]",
+            "threshold": "ecp-api.log_member",
+            "metric_value": "이벤트 탐지 [심각도: WARN , 개행 포함, 내용 패턴: .*member.*] ",
+            "status": "UP ",
+            "severity": "주의"
+        }
+
+        raw_data_resource_name = {
+            "metric_name": "회원_주의로그 ",
+            "event_id": "32545698",
+            "summary": "01. APMALL>EAPWAS-172.28.102.143>monitor group>ecp-api.log_member",
+            "urgency": "1",
+            "event_time": "2021-06-29 09:50:51",
+            "conditionlog": "[1회 발생] 이벤트 탐지 [심각도: WARN, 내용: [2021-06-29 21:50:46,433] [ WARN] [http-nio-8080-exec-37] [B2CMON_LOG.logging:130] [MON|2021-06-29 21:50:46,433|WARN|M01||MobileWeb|member||||MLEC_MEMBER_AUTH_FAILURE|/MON] Fail. API=post:/v1/M01/ap/members/autoLogin, resultMsg=유효하지 않은 자격증명이 제시 [MemberUtils.memberMonLoggingError:457 < ApMemberAuthRestApi.login:273 < ApMemberAuthRestApi.memberAutoLogin:373 < GeneratedMethodAccessor3491.invoke:-1 < DelegatingMethodAccessorImpl.invoke:43]]",
+            "resource_name": "EAPWAS-172.28.102.143",
+            "threshold": "ecp-api.log_member",
+            "metric_value": "이벤트 탐지 [심각도: WARN , 개행 포함, 내용 패턴: .*member.*] ",
+            "status": "UP ",
+            "severity": "주의"
+        }
         param_list = [
                       # raw_data_2,
                       # raw_data_3,
@@ -152,12 +194,14 @@ class TestEvent(TestCase):
                       # raw_data_7,
                       # raw_data_8,
                       # raw_data_9,
-                      raw_data_11
+                        # raw_data_11,
+                        raw_data_both,
+                        raw_data_host_ip,
+                        raw_data_resource_name
                       ]
 
         for idx, raw_dt in enumerate(param_list):
-            print(f'#### {idx} ####')
-            print(raw_dt)
+            print(f'#### {idx} #### ')
             parsed_data = self.monitoring.Event.parse({'options': options, 'data': raw_dt})
             print_json(parsed_data)
             print()

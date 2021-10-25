@@ -99,7 +99,6 @@ class EventManager(BaseManager):
     @staticmethod
     def _get_resource(raw_data):
         resource_info = {}
-        if 'host_ip' in raw_data:
 
         if 'resource_name' in raw_data:
             resource_info.update({'name': raw_data.get('resource_name')})
